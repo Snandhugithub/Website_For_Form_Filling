@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<base target="_top">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Details</title>
+<link
+href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+rel="stylesheet"
+integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65Voh
+hpuuCOmLASjC" crossorigin="anonymous">
+<?!=include('javascript');?>
+<script
+src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+Jc
+Xn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+<script type="text/javascript">
+function displayGreeting(event) {
+let usrname = document.getElementById('usrname').value;
+document.getElementById('outputDiv').innerHTML = 'Welcome ' + usrname ;
+}
+</script>
+<style>
+.offset-4
+{
+  margin-left: 28%;
+}
+div1 
+{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+span
+{
+  color: red;
+  display:block;
+  margin-top: 10px;
+}
+</style>
+<body style="background: linear-gradient(red, blue);">
+<center>
+<br><br>
+<div class="container my-4">
+<div class="row mt-5">
+<div class="col-md-5 offset-4">
+<div class="card shadow ">
+<div class="card-body">
+<form id="myForm" onsubmit="handleFormSumbit(this)">
+<h6 class="text-center display-4 my-4"><b>Student Details</b></h6>
+<hr>
+<form class="form " onsubmit="displayGreeting(event)" >
+<div class="form-group mb-3" >
+<h3>Enter your name</h3>
+<input type="input" class="form-control" id="usrname" onchange="hi()"
+name="usrname" >
+<p id="wel-usr"></p>
+<div id="outputDiv"></div><br>
+<h3>Blood Group</h3>
+<select class="form-control" name="bloodgroup">
+<option>Choose blood group</option>
+<option>A</option>
+<option>A+</option>
+<option>A-</option>
+<option>B+</option>
+<option>B-</option>
+<option>AB+</option>
+<option>AB-</option>
+<option>O+</option>
+<option>O-</option>
+</select>
+<br>
+<h3><label for="willing">Willing to donate blood</label></h3>
+<input type="radio" name="willing" id="will" value="Yes"
+onclick="myFunc();"> <i style="font-size: 20px;">Yes</i>
+<input type="radio" name="willing" id="notwill" value="No"
+onclick="myFunc();"> <i style="font-size: 20px;"> No</i>
+<br><br>
+<h3>Enter your E-mail</h3>
+<input type="email" id="" class="form-control" name="email" required>
+<br>
+<h3>Enter Mobile Number</h3>
+<select>
+<option>+91</option>
+</select>
+<input type="text" style="width:430px" name="phone" size="10"
+required/><br><br>
+<h3>Enter your DOB</h3>
+<input type="date" id="bdt" class="form-control" name="dob" /><br>
+<button id="done" onclick="update()" type="button" class="btn
+btn-primary">Done</button>
+<p id="year"></p>
+<p id="month"></p>
+<p id="week"></p>
+<p id="day"></p>
+<p id="hour"></p>
+<p id="minute"></p>
+<p id="second"></p>
+<h3>File Upload(max size 1mb)</h3><br>
+<div class="div1">
+<input type="file" data-maxFileSize="2" id="file" onchange="change()">
+<span id="file-error" >
+</span>
+<input class="simple-file-upload" data-tag="website-files" type="hidden"
+name="user[icon_url]"
+id="user_icon_url" data-maxFileSize="2" data-accepted="image/*"><br>
+<h3>Signature Upload(max size 1mb)</h3><br>
+<div class="div1">
+<input type="file" data-maxFileSize="2" id="file1" onchange="change1()">
+<span id="file-error1" >
+</span>
+<input class="simple-file-upload" data-tag="website-files" type="hidden"
+name="user[icon_url]"
+id="user_icon_url" data-maxFileSize="2" data-accepted="image/*">
+<button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</center>
+</body>
+<script>
+function myFunc()
+{
+  var radio = document.getElementsByName("Willing");
+  var a = document.getElementById("will")
+  var b = document.getElementById("notwill")
+  console.log(radio)
+  if(a.checked)
+  {
+    alert("Thankyou for donating")
+  }
+  else if(b.checked)
+  {
+    alert("Please try to donate")
+  }
+}
+function hi()
+{
+  var usr = document.getElementById('usrname')
+  var words = usr.value.split(' ');
+  var CapitalizedWords = [];
+  words.forEach(element => 
+  {
+    CapitalizedWords.push(element[0].toUpperCase() + element.slice(1,element.length));
+  });
+  document.getElementById('usrname').value=CapitalizedWords.join(' ');
+  document.getElementById('wel-usr').innerHTML=`Welcome
+  ${CapitalizedWords.join(' ')}`
+}
+function update()
+{
+  let bdt=document.querySelector("#bdt").value,
+  bday=new Date(bdt),
+  bday_val=bday.getTime(),
+  today=new Date(),
+  now=today.getTime(),
+  value=now-bday_val,
+  var_day=Math.floor(value/(1000 * 60 * 24))%30,
+  var_month=Math.floor(value/(1000 * 60 * 60 * 24 * 30.4375))%12;
+  var_year=Math.floor(value/(1000 * 60 * 60 * 24 * 365.25));
+  console.log(var_year+" "+var_month+" "+var_day)
+  let insert=function(x,y)
+  {
+    document.querySelector(x).innerHTML=y;
+  }
+  insert("#year", var_year + "yearss");
+  insert("#month", var_month + "months");
+  insert("#day", var_day + "days");
+  console.log(var_day)
+};
+function change()
+{
+  var f = document.getElementById("file")
+  console.log(f.files[0].size<1000000)
+  if(f.files[0].size>1000000)
+  {
+    document.getElementById("file-error").innerHTML = '<h4>Error due to large
+    size</h4>'
+  }
+  else
+  {
+    document.getElementById("file-error").innerHTML = '<h4 style="color:green">Success</h4>'
+  }
+}
+function change1()
+{
+  var f = document.getElementById("file1")
+  console.log(f.files[0].size<1000000)
+  if(f.files[0].size>1000000)
+  {
+    document.getElementById("file-error1").innerHTML = '<h4>Error due to large size</h4>'
+  }
+  else
+  {
+    document.getElementById("file-error1").innerHTML = '<h4
+    style="color:green">Success</h4>'
+  }
+}
+</script>
+</html>
