@@ -1,6 +1,6 @@
 # Website_For_Form_Filling
 
-# Student DEtails Form
+# Student Details Form
 
 Creating a complete Google Form using only HTML is not possible, as Google Forms are more complex and require server-side processing to collect and store responses. However, you can create a form with HTML that mimics the appearance of a simple form. The data won't be submitted to a Google Form, but you can customize the HTML form to handle the input data as per your requirements.
 
